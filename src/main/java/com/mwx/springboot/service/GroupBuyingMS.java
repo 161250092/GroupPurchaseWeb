@@ -1,7 +1,8 @@
 package com.mwx.springboot.service;
 
 
-import entity.GroupPurchaseItem;
+
+import service.GroupPurchaseItem;
 
 import java.rmi.RemoteException;
 import java.util.List;

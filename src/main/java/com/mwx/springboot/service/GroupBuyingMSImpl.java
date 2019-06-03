@@ -1,9 +1,10 @@
 package com.mwx.springboot.service;
 
 
-import entity.GroupPurchaseItem;
+
 import org.springframework.stereotype.Service;
-import service.GroupPurchaseManagementSystem;
+import service.GroupPurchase4Web;
+import service.GroupPurchaseItem;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -15,15 +16,15 @@ import java.util.List;
 @Service
 public class GroupBuyingMSImpl implements GroupBuyingMS {
 //
-    private static GroupPurchaseManagementSystem groupPurchaseManagementSystem;
-    private static String location ="rmi://localhost:1099";
-
+    private static GroupPurchase4Web groupPurchaseManagementSystem;
+    private static String ipAddress = "172.17.161.112";
+    private static int port =8080;
+    private static String location ="rmi://"+ipAddress+":"+port;
     static {
 
         try {
             System.setSecurityManager(new java.rmi.RMISecurityManager());
-
-            groupPurchaseManagementSystem = (GroupPurchaseManagementSystem) Naming.lookup(location+"/GroupPurchaseManagementSystem");
+            groupPurchaseManagementSystem = (GroupPurchase4Web) Naming.lookup(location+"/groupPurchase4Web");
         } catch (NotBoundException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
