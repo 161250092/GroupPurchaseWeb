@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head"></head>
+<title>团购网站</title>
+<body>
+
+    <div id="app">
+    <div th:replace="common/guide"></div>
+    <el-table :data="commodities" style="width: 90%">
+
+        <el-table-column type="expand">
+            <template slot-scope="props">
+                <el-form label-position="left" inline class="demo-table-expand">
+                    <el-form-item label="介绍">
+                        <span>{{ props.row.introduction }}</span>
+                    </el-form-item>
+                </el-form>
+            </template>
+        </el-table-column>
+
+        <el-table-column label="编号" prop="id">
+        </el-table-column>
+
+        <el-table-column label="商品名" prop="productName">
+        </el-table-column>
+
+        <el-table-column label="价格" prop="price">
+        </el-table-column>
+
+        <el-table-column label="限购" prop="limit">
+        </el-table-column>
+
+        <el-table-column label="商家" prop="seller">
+        </el-table-column>
+
+        <el-table-column label="" align="center" fixed="right">
+            <template slot-scope="scope">
+                <el-button
+                        @click="purchase(scope.row)">购买
+                </el-button>
+            </template>
+        </el-table-column>
+
+    </el-table>
+
+
+    <el-dialog title="购买" :visible.sync="purchaseOrder" width="40%" :close-on-click-modal="false"
+               :close-on-press-escape="false">
+
+
+        <el-form >
+
+            <el-form-item >
+                <p>商品    {{selectedCommodityId}}</p>
+            </el-form-item>
+
+            <el-form-item label="银行账号">
+                <el-input v-model="bankAccount"></el-input>
+            </el-form-item>
+
+
+            <el-form-item label="密码">
+                <el-input v-model="password"></el-input>
+            </el-form-item>
+
+
+            <el-form-item label="手机号码">
+                <el-input v-model="phoneNumber"></el-input>
+            </el-form-item>
+
+
+        </el-form>
+
+
+        <div slot="footer" class="dialog-footer">
+            <el-button type="primary" @click="submitOrder()">购买</el-button>
+        </div>
+
+    </el-dialog>
+
+
+    </div>
+
+
+
+</body>
+
+<div th:replace="common/js"></div>
+<script type="text/javascript" th:src="@{../../js/groupPurchase.js}"></script>
+</html>
